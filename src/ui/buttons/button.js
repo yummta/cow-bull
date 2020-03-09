@@ -86,6 +86,7 @@ function Button({
   as,
   onClick,
   disabled,
+  href,
 }) {
   switch (type) {
     case "primary":
@@ -95,6 +96,7 @@ function Button({
           as={as}
           onClick={onClick}
           disabled={disabled}
+          href={href}
         >
           {children}
         </PrimaryStyles>
@@ -106,6 +108,7 @@ function Button({
           as={as}
           onClick={onClick}
           disabled={disabled}
+          href={href}
         >
           {children}
         </SecondaryStyles>
@@ -117,6 +120,7 @@ function Button({
           as={as}
           onClick={onClick}
           disabled={disabled}
+          href={href}
         >
           {children}
         </TertiaryStyles>
@@ -128,6 +132,7 @@ function Button({
           as={as}
           onClick={onClick}
           disabled={disabled}
+          href={href}
         >
           {children}
         </PrimaryStyles>

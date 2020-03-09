@@ -52,11 +52,9 @@ function GameOver({ guessList, moves, winner, oppData, number }) {
       <Grid>
         <Header>
           <Links>
-            <Link to="/">
-              <Button to="/" type="tertiary" as="Link">
-                Home
-              </Button>
-            </Link>
+            <Button type="tertiary" as="a" href="/">
+              Home
+            </Button>
             <Button type="tertiary" onClick={handleViewSwitch}>
               {showYours ? "Opponent Moves" : "My Moves"}
             </Button>
