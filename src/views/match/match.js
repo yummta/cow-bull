@@ -3,6 +3,7 @@ import SocketContext from "../../contexts/SocketContext";
 import ContainerApp from "components/container-app";
 import ProgressBar from "components/progress-bar";
 import Move from "components/move/move";
+import validateNumber from "../../lib/validateNumber";
 import {
   Footer,
   ArroRightIcon,
@@ -36,6 +37,7 @@ function Match({
     bulls: "-",
     guess: "----",
   });
+  const [valid, setValid] = useState(false);
 
   useEffect(() => {
     if (!socket) return;
@@ -53,6 +55,19 @@ function Match({
       }
     });
   }, [socket]);
+
+  const handleChangeGuess = event => {
+    const value = event.currentTarget.value;
+    if (validateNumber(value)) {
+      setGuess(value);
+    }
+  };
+
+  useEffect(() => {
+    const splitNumber = guess.split("");
+    const cleanRepeat = [...new Set(splitNumber)];
+    setValid(cleanRepeat.length === 4);
+  }, [guess]);
 
   const handleSubmit = () => {
     socket.emit("sendGuess", { roomId, id: socket.id, guess }, () => {
@@ -98,9 +113,13 @@ function Match({
             label="Move #"
             placeholder="#"
             value={guess}
-            onChange={e => setGuess(e.target.value)}
+            onChange={handleChangeGuess}
           />
-          <SendButton type="primary" onClick={handleSubmit} disabled={!current}>
+          <SendButton
+            type="primary"
+            onClick={handleSubmit}
+            disabled={!current || !valid}
+          >
             <ArroRightIcon />
           </SendButton>
         </Footer>
