@@ -12,6 +12,7 @@ import io from "socket.io-client";
 function App() {
   const ENDPOINT = "https://cow-bull-server.herokuapp.com/";
   const [socket, setSocket] = useState("");
+  console.log("testiong new remote");
 
   useEffect(() => {
     setSocket(() => io(ENDPOINT));
