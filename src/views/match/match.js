@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import SocketContext from "../../contexts/SocketContext";
 import ContainerApp from "components/container-app";
-import ProgressBar from "components/progress-bar";
 import Move from "components/move/move";
 import validateNumber from "../../lib/validateNumber";
 import {
@@ -12,23 +11,23 @@ import {
   Grid,
   Header,
   Body,
-  LiveMove,
   HeaderContent,
   Heading4,
   Moves,
   StyledMove,
   StyledBigNumbers,
+  HighlightNumber,
 } from "./match.styles";
 
 function Match({
-  progress = 30,
   roomId,
-  current,
+  current = false,
   setCurrent,
   setMoves,
-  guessList,
+  guessList = [],
   setGuessList,
   setWinner,
+  number,
 }) {
   const socket = useContext(SocketContext);
   const [guess, setGuess] = useState("");
@@ -76,24 +75,26 @@ function Match({
       setGuess("");
     });
   };
+
   return (
     <ContainerApp>
       <Grid>
         <Header>
-          <ProgressBar progress={progress} />
-          <HeaderContent>
-            {current ? (
-              <Heading4>Your move</Heading4>
-            ) : (
-              <LiveMove>
-                <Heading4>Opponent move</Heading4>
-                <Move
-                  number={opponentMove.guess}
-                  result={[opponentMove.cows, opponentMove.bulls]}
-                  size="small"
-                ></Move>
-              </LiveMove>
-            )}
+          <HeaderContent current={current}>
+            <div>
+              <Heading4>Secret number</Heading4>
+              <HighlightNumber>
+                <span>{number}</span>
+              </HighlightNumber>
+            </div>
+            <div>
+              <Heading4 align="right">Opponent last move</Heading4>
+              <Move
+                number={opponentMove.guess}
+                result={[opponentMove.cows, opponentMove.bulls]}
+                size="small"
+              ></Move>
+            </div>
           </HeaderContent>
         </Header>
         <Body>
@@ -108,7 +109,7 @@ function Match({
             ))}
           </Moves>
         </Body>
-        <Footer>
+        <Footer current={current}>
           <StyledInputText
             label="Move #"
             placeholder="#"
