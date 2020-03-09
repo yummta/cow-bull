@@ -10,7 +10,7 @@ import SocketContext from "./contexts/SocketContext";
 import io from "socket.io-client";
 
 function App() {
-  const ENDPOINT = "https://cow-bull-server.herokuapp.com/";
+  const ENDPOINT = "http://localhost:8000/"; // "https://cow-bull-server.herokuapp.com/";
   const [socket, setSocket] = useState("");
 
   useEffect(() => {

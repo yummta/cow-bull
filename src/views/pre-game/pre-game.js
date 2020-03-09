@@ -4,6 +4,7 @@ import Button from "ui/buttons/button";
 import ContainerApp from "components/container-app";
 import { Center } from "ui/layout";
 import * as S from "./pre-game.styles";
+import validateNumber from "../../lib/validateNumber";
 
 function PreGame({ setParent }) {
   const [number, setNumber] = useState("");
@@ -11,7 +12,7 @@ function PreGame({ setParent }) {
 
   const handleChangeNumber = event => {
     const value = event.currentTarget.value;
-    if (value.match(/^\d{0,4}$/)) {
+    if (validateNumber(value)) {
       setNumber(value);
     }
   };
@@ -19,7 +20,7 @@ function PreGame({ setParent }) {
   useEffect(() => {
     const splitNumber = number.split("");
     const cleanRepeat = [...new Set(splitNumber)];
-    setValid(cleanRepeat.length !== 4);
+    setValid(cleanRepeat.length === 4);
   }, [number]);
 
   const handleClick = () => {
@@ -42,7 +43,7 @@ function PreGame({ setParent }) {
         {/* <input type="text" onChange={handleChangeNumber} value={number} /> */}
         <S.Message>[!] The numbers mustn't repeat</S.Message>
         <S.Actions>
-          <Button type="primary" onClick={handleClick} disabled={valid}>
+          <Button type="primary" onClick={handleClick} disabled={!valid}>
             Next <S.ArroRightIcon />
           </Button>
         </S.Actions>
