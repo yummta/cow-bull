@@ -31,16 +31,25 @@ function Match({
 }) {
   const socket = useContext(SocketContext);
   const [guess, setGuess] = useState("");
+  const [opponentMove, setOpponentMove] = useState({
+    cows: "-",
+    bulls: "-",
+    guess: "----",
+  });
 
   useEffect(() => {
     if (!socket) return;
-    socket.on("guessResult", ({ cows, bulls, guess }) => {
-      setGuessList(currentList => [
-        ...currentList,
-        { guess: guess, result: { cows, bulls } },
-      ]);
-      if (bulls === 4) {
-        setWinner(true);
+    socket.on("guessResult", ({ cows, bulls, guess, id }) => {
+      if (socket.id === id) {
+        setGuessList(currentList => [
+          ...currentList,
+          { guess: guess, result: { cows, bulls } },
+        ]);
+        if (bulls === 4) {
+          setWinner(true);
+        }
+      } else {
+        setOpponentMove({ cows, bulls, guess });
       }
     });
   }, [socket]);
@@ -63,7 +72,11 @@ function Match({
             ) : (
               <LiveMove>
                 <Heading4>Opponent move</Heading4>
-                <Move number="????" result={["-", "-"]} size="small"></Move>
+                <Move
+                  number={opponentMove.guess}
+                  result={[opponentMove.cows, opponentMove.bulls]}
+                  size="small"
+                ></Move>
               </LiveMove>
             )}
           </HeaderContent>
