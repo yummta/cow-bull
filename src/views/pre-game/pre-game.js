@@ -8,7 +8,7 @@ import validateNumber from "../../lib/validateNumber";
 
 function PreGame({ setParent }) {
   const [number, setNumber] = useState("");
-  const [valid, setValid] = useState(true);
+  const [valid, setValid] = useState(false);
 
   const handleChangeNumber = event => {
     const value = event.currentTarget.value;
@@ -23,8 +23,11 @@ function PreGame({ setParent }) {
     setValid(cleanRepeat.length === 4);
   }, [number]);
 
-  const handleClick = () => {
-    setParent(number);
+  const handleSubmit = event => {
+    event.preventDefault();
+    if (valid) {
+      setParent(number);
+    }
   };
 
   return (
@@ -33,20 +36,21 @@ function PreGame({ setParent }) {
         <S.StyledLink to="/new-game">
           <BackButton />
         </S.StyledLink>
-        <S.StyledInputText
-          label="Put a number of 4 digits"
-          center
-          placeholder="# # # #"
-          value={number}
-          onChange={handleChangeNumber}
-        />
-        {/* <input type="text" onChange={handleChangeNumber} value={number} /> */}
-        <S.Message>[!] The numbers mustn't repeat</S.Message>
-        <S.Actions>
-          <Button type="primary" onClick={handleClick} disabled={!valid}>
-            Next <S.ArroRightIcon />
-          </Button>
-        </S.Actions>
+        <Center onSubmit={handleSubmit} as="form">
+          <S.StyledInputText
+            label="Put a number of 4 digits"
+            center
+            placeholder="# # # #"
+            value={number}
+            onChange={handleChangeNumber}
+          />
+          <S.Message>[!] The numbers mustn't repeat</S.Message>
+          <S.Actions>
+            <Button type="primary" disabled={!valid}>
+              Next <S.ArroRightIcon />
+            </Button>
+          </S.Actions>
+        </Center>
       </Center>
     </ContainerApp>
   );
