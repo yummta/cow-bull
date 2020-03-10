@@ -19,6 +19,7 @@ function Game() {
   const [current, setCurrent] = useState(false);
   const [moves, setMoves] = useState(0);
   const [winner, setWinner] = useState(false);
+  const [ready, setReady] = useState(false);
   const [media] = useState(new Audio(soundtrack));
 
   useEffect(() => {
@@ -33,7 +34,7 @@ function Game() {
       if (current === socket.id) {
         setCurrent(true);
       }
-      setGameState("playing");
+      setReady(true);
     });
   }, [socket]);
 
@@ -65,7 +66,9 @@ function Game() {
   return (
     <section>
       {gameState === "pregame" && <Pregame setParent={setNumber} />}
-      {gameState === "lobby" && <Lobby roomId={roomId} />}
+      {gameState === "lobby" && (
+        <Lobby roomId={roomId} ready={ready} setGameState={setGameState} />
+      )}
       {gameState === "playing" && (
         <Match
           roomId={roomId}
