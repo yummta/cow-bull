@@ -5,6 +5,7 @@ import Pregame from "./views/pre-game/pre-game";
 import Lobby from "./views/lobby/lobby";
 import Match from "./views/match/match";
 import GameOver from "./views/gameover/gameover";
+import soundtrack from "assets/chamber-of-secrets-short.wav";
 
 function Game() {
   const socket = useContext(SocketContext);
@@ -18,6 +19,7 @@ function Game() {
   const [current, setCurrent] = useState(false);
   const [moves, setMoves] = useState(0);
   const [winner, setWinner] = useState(false);
+  const [media] = useState(new Audio(soundtrack));
 
   useEffect(() => {
     if (!number || !roomId) return;
@@ -74,6 +76,7 @@ function Game() {
           setGuessList={setGuessList}
           setWinner={setWinner}
           number={number}
+          media={media}
         />
       )}
       {gameState === "gameover" && (
@@ -83,6 +86,7 @@ function Game() {
           winner={winner}
           oppData={{ number: oppNumber, guessList: oppGuessList }}
           number={number}
+          media={media}
         />
       )}
     </section>

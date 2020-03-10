@@ -50,7 +50,7 @@ const Moves = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100% - 182px);
+  height: calc(100% - 206px);
   overflow-y: auto;
   box-sizing: border-box;
   padding-bottom: 16px;
