@@ -73,6 +73,7 @@ function Game() {
           guessList={guessList}
           setGuessList={setGuessList}
           setWinner={setWinner}
+          number={number}
         />
       )}
       {gameState === "gameover" && (

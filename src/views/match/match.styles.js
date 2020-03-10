@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { color } from "variables";
+import { color, weight, radius } from "variables";
 import { FaArrowRight } from "react-icons/fa";
 import Button from "ui/buttons/button";
 import InputText from "ui/form/input-text";
@@ -19,11 +19,12 @@ const SendButton = styled(Button)`
   margin-left: 8px;
 `;
 const Footer = styled.div`
-  background-color: ${color.grayHard};
   display: flex;
   align-items: flex-end;
   padding: 24px;
   grid-area: footer;
+  transition: all 0.25s;
+  background-color: ${props => (props.current ? "#dcfbeb" : color.grayHard)};
 `;
 
 const ArroRightIcon = styled(FaArrowRight)`
@@ -37,7 +38,7 @@ const Grid = styled.div`
   bottom: 0;
   top: 0;
   display: grid;
-  grid-template-rows: 56px 1fr 124px;
+  grid-template-rows: 106px 1fr 124px;
   grid-template-areas:
     "header"
     "body"
@@ -54,34 +55,30 @@ const Body = styled.div`
   overflow: hidden;
 `;
 
-const LiveMove = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 const Heading4 = styled.span`
   font-size: 12px;
   text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+  text-align: ${props => props.align && props.align};
 `;
 
 const HeaderContent = styled.div`
-  position: absolute;
+  padding: 24px;
   height: 100%;
-  top: 0;
-  left: 16px;
-  right: 16px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
+  transition: all 0.25s;
+  background-color: ${props => (!props.current ? "#dcfbeb" : color.grayLight)};
 `;
 
 const Moves = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100% - 136px);
+  height: calc(100% - 88px);
   overflow-y: auto;
   box-sizing: border-box;
   padding-bottom: 16px;
@@ -91,12 +88,28 @@ const Moves = styled.div`
 `;
 
 const StyledBigNumbers = styled(BigNumbers)`
-  margin-bottom: 24px;
-  margin-top: 64px;
+  padding-bottom: 16px;
+  padding-top: 24px;
 `;
 
 const StyledMove = styled(Move)`
   flex-shrink: 0;
+`;
+
+const HighlightNumber = styled.div`
+  background-color: ${color.dark};
+  color: white;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 8px;
+  border-radius: ${radius.small};
+  font-weight: ${weight.bold};
+  & > * {
+    letter-spacing: 0.7em;
+    margin-right: -0.7em;
+  }
 `;
 
 export {
@@ -107,10 +120,10 @@ export {
   Grid,
   Header,
   Body,
-  LiveMove,
-  Heading4,
   HeaderContent,
+  Heading4,
   Moves,
   StyledMove,
   StyledBigNumbers,
+  HighlightNumber,
 };
