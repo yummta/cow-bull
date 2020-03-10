@@ -16,7 +16,7 @@ function Home() {
         </S.Brand>
         <S.Actions>
           <Link to="/new-game">
-            <Button type={"secondary"}>New game</Button>
+            <Button type={"primary"}>New game</Button>
           </Link>
           <Link to="/join-game">
             <Button type={"secondary"}>Join a game</Button>
