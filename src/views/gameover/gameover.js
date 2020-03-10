@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import SocketContext from "../../contexts/SocketContext";
 import ContainerApp from "components/container-app";
 import Button from "ui/buttons/button";
-import { Link } from "@reach/router";
 
 import {
   Footer,
@@ -17,7 +16,7 @@ import {
   Resume,
 } from "./gameover.styles";
 
-function GameOver({ guessList, moves, winner, oppData, number }) {
+function GameOver({ guessList, moves, winner, oppData, number, media }) {
   const socket = useContext(SocketContext);
   const [showYours, setShowYours] = useState(true);
 
@@ -46,6 +45,10 @@ function GameOver({ guessList, moves, winner, oppData, number }) {
   const showMessage = () => {
     return winner ? `You resolved it on ${moves} moves` : "Your moves";
   };
+
+  useEffect(() => {
+    if (media) media.pause();
+  }, []);
 
   return (
     <ContainerApp>

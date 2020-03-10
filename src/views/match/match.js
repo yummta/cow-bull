@@ -28,6 +28,7 @@ function Match({
   setGuessList,
   setWinner,
   number,
+  media,
 }) {
   const socket = useContext(SocketContext);
   const [guess, setGuess] = useState("");
@@ -38,6 +39,13 @@ function Match({
   });
   const [valid, setValid] = useState(false);
   const listMoves = useRef(null);
+
+  const infiniteLoop = soundTrack => {
+    if (soundTrack) {
+      soundTrack.currentTime = 0;
+      soundTrack.play();
+    }
+  };
 
   useEffect(() => {
     if (!socket) return;
@@ -83,6 +91,13 @@ function Match({
       });
     }
   };
+
+  useEffect(() => {
+    if (media) {
+      media.play();
+      media.addEventListener("ended", () => infiniteLoop(media));
+    }
+  }, [media]);
 
   return (
     <ContainerApp>
