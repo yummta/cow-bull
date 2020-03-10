@@ -85,6 +85,7 @@ const Moves = styled.div`
   overflow-y: auto;
   box-sizing: border-box;
   padding-bottom: 16px;
+  scroll-behavior: smooth;
   & > * {
     margin-bottom: 8px;
   }

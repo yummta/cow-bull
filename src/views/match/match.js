@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import SocketContext from "../../contexts/SocketContext";
 import ContainerApp from "components/container-app";
 import ProgressBar from "components/progress-bar";
@@ -38,6 +38,7 @@ function Match({
     guess: "----",
   });
   const [valid, setValid] = useState(false);
+  const listMoves = useRef(null);
 
   useEffect(() => {
     if (!socket) return;
@@ -55,6 +56,10 @@ function Match({
       }
     });
   }, [socket]);
+
+  useEffect(() => {
+    listMoves.current.scrollTop = listMoves.current.scrollHeight;
+  }, [guessList]);
 
   const handleChangeGuess = event => {
     const value = event.currentTarget.value;
@@ -98,7 +103,7 @@ function Match({
         </Header>
         <Body>
           <StyledBigNumbers />
-          <Moves>
+          <Moves ref={listMoves}>
             {guessList.map((guessItem, index) => (
               <StyledMove
                 key={index}
