@@ -73,12 +73,15 @@ function Match({
     setValid(cleanRepeat.length === 4);
   }, [guess]);
 
-  const handleSubmit = () => {
-    socket.emit("sendGuess", { roomId, id: socket.id, guess }, () => {
-      setCurrent(false);
-      setMoves(current => current + 1);
-      setGuess("");
-    });
+  const handleSubmit = event => {
+    event.preventDefault();
+    if (valid) {
+      socket.emit("sendGuess", { roomId, id: socket.id, guess }, () => {
+        setCurrent(false);
+        setMoves(current => current + 1);
+        setGuess("");
+      });
+    }
   };
 
   return (
@@ -114,18 +117,14 @@ function Match({
             ))}
           </Moves>
         </Body>
-        <Footer current={current}>
+        <Footer current={current} as="form" onSubmit={handleSubmit}>
           <StyledInputText
             label="Move #"
             placeholder="#"
             value={guess}
             onChange={handleChangeGuess}
           />
-          <SendButton
-            type="primary"
-            onClick={handleSubmit}
-            disabled={!current || !valid}
-          >
+          <SendButton type="primary" disabled={!current || !valid}>
             <ArroRightIcon />
           </SendButton>
         </Footer>
