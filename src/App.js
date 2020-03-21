@@ -30,7 +30,7 @@ function App() {
   return (
     <SocketContext.Provider value={socket}>
       <Router>
-        <Library path="library" />
+        <Library path="/library" />
         <Home path="/" />
         <NewGame path="/new-game" />
         <JoinGame path="/join-game" />
