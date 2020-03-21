@@ -2,19 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import SocketContext from "../../contexts/SocketContext";
 import ContainerApp from "components/container-app";
 import Button from "ui/buttons/button";
-
-import {
-  Footer,
-  Grid,
-  Header,
-  Body,
-  Links,
-  Moves,
-  StyledMove,
-  StyledBigNumbers,
-  Heading3,
-  Resume,
-} from "./gameover.styles";
+import * as S from "./styles";
 
 function GameOver({ guessList, moves, winner, oppData, number, media }) {
   const socket = useContext(SocketContext);
@@ -32,7 +20,7 @@ function GameOver({ guessList, moves, winner, oppData, number, media }) {
     return (
       <>
         {list.map((item, index) => (
-          <StyledMove
+          <S.StyledMove
             key={index}
             number={item.guess}
             result={[item.result.cows, item.result.bulls]}
@@ -48,40 +36,40 @@ function GameOver({ guessList, moves, winner, oppData, number, media }) {
 
   useEffect(() => {
     if (media) media.pause();
-  }, []);
+  }, [media]);
 
   return (
     <ContainerApp>
-      <Grid>
-        <Header>
-          <Links>
+      <S.Grid>
+        <S.Header>
+          <S.Links>
             <Button type="tertiary" as="a" href="/">
               Home
             </Button>
             <Button type="tertiary" onClick={handleViewSwitch}>
               {showYours ? "Opponent Moves" : "My Moves"}
             </Button>
-          </Links>
-        </Header>
-        <Body>
-          <Resume>
-            <Heading3>{winner ? "YOU WIN" : "YOU LOSE"}</Heading3>
-            <StyledBigNumbers
+          </S.Links>
+        </S.Header>
+        <S.Body>
+          <S.Resume>
+            <S.Heading3>{winner ? "YOU WIN" : "YOU LOSE"}</S.Heading3>
+            <S.StyledBigNumbers
               mode="dark"
               number={showYours ? oppData.number : number}
             />
             <p>{showYours ? showMessage() : "Opponent moves"}</p>
-          </Resume>
-          <Moves>
+          </S.Resume>
+          <S.Moves>
             <MovesList list={showYours ? guessList : oppData.guessList} />
-          </Moves>
-        </Body>
-        <Footer>
+          </S.Moves>
+        </S.Body>
+        <S.Footer>
           <Button type="primary" onClick={handleRematch}>
             Rematch
           </Button>
-        </Footer>
-      </Grid>
+        </S.Footer>
+      </S.Grid>
     </ContainerApp>
   );
 }

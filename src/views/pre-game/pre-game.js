@@ -3,8 +3,8 @@ import BackButton from "ui/buttons/back-button";
 import Button from "ui/buttons/button";
 import ContainerApp from "components/container-app";
 import { Center } from "ui/layout";
-import * as S from "./pre-game.styles";
 import validateNumber from "../../lib/validateNumber";
+import * as S from "./styles";
 
 function PreGame({ setParent }) {
   const [number, setNumber] = useState("");

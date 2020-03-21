@@ -4,7 +4,7 @@ import cow from "assets/svg/big-cow.svg";
 import bull from "assets/svg/big-bull.svg";
 import ContainerApp from "components/container-app";
 import Link from "ui/link";
-import * as S from "./home.styles";
+import * as S from "./styles";
 
 function Home() {
   return (

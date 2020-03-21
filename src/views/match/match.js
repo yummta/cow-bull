@@ -3,21 +3,7 @@ import SocketContext from "../../contexts/SocketContext";
 import ContainerApp from "components/container-app";
 import Move from "components/move/move";
 import validateNumber from "../../lib/validateNumber";
-import {
-  Footer,
-  ArroRightIcon,
-  SendButton,
-  StyledInputText,
-  Grid,
-  Header,
-  Body,
-  HeaderContent,
-  Heading4,
-  Moves,
-  StyledMove,
-  StyledBigNumbers,
-  HighlightNumber,
-} from "./match.styles";
+import * as S from "./styles";
 
 function Match({
   roomId,
@@ -62,7 +48,7 @@ function Match({
         setOpponentMove({ cows, bulls, guess });
       }
     });
-  }, [socket]);
+  }, [setGuessList, setWinner, socket]);
 
   useEffect(() => {
     listMoves.current.scrollTop = listMoves.current.scrollHeight;
@@ -101,49 +87,49 @@ function Match({
 
   return (
     <ContainerApp>
-      <Grid>
-        <Header>
-          <HeaderContent current={current}>
+      <S.Grid>
+        <S.Header>
+          <S.HeaderContent current={current}>
             <div>
-              <Heading4>Secret number</Heading4>
-              <HighlightNumber>
+              <S.Heading4>Secret number</S.Heading4>
+              <S.HighlightNumber>
                 <span>{number}</span>
-              </HighlightNumber>
+              </S.HighlightNumber>
             </div>
             <div>
-              <Heading4 align="right">Opponent last move</Heading4>
+              <S.Heading4 align="right">Opponent last move</S.Heading4>
               <Move
                 number={opponentMove.guess}
                 result={[opponentMove.cows, opponentMove.bulls]}
                 size="small"
               ></Move>
             </div>
-          </HeaderContent>
-        </Header>
-        <Body>
-          <StyledBigNumbers />
-          <Moves ref={listMoves}>
+          </S.HeaderContent>
+        </S.Header>
+        <S.Body>
+          <S.StyledBigNumbers />
+          <S.Moves ref={listMoves}>
             {guessList.map((guessItem, index) => (
-              <StyledMove
+              <S.StyledMove
                 key={index}
                 number={guessItem.guess}
                 result={[guessItem.result.cows, guessItem.result.bulls]}
               />
             ))}
-          </Moves>
-        </Body>
-        <Footer current={current} as="form" onSubmit={handleSubmit}>
-          <StyledInputText
+          </S.Moves>
+        </S.Body>
+        <S.Footer current={current} as="form" onSubmit={handleSubmit}>
+          <S.StyledInputText
             label="Move #"
             placeholder="#"
             value={guess}
             onChange={handleChangeGuess}
           />
-          <SendButton type="primary" disabled={!current || !valid}>
-            <ArroRightIcon />
-          </SendButton>
-        </Footer>
-      </Grid>
+          <S.SendButton type="primary" disabled={!current || !valid}>
+            <S.ArrowRightIcon />
+          </S.SendButton>
+        </S.Footer>
+      </S.Grid>
     </ContainerApp>
   );
 }
