@@ -6,7 +6,7 @@ import Button from "ui/buttons/button";
 import ContainerApp from "components/container-app";
 import InputText from "ui/form/input-text";
 import { Center } from "ui/layout";
-import * as S from "./join-game.styles";
+import * as S from "./styles";
 
 function JoinGame() {
   const socket = useContext(SocketContext);

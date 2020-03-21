@@ -5,7 +5,7 @@ import Button from "ui/buttons/button";
 import ContainerApp from "components/container-app";
 import { Center } from "ui/layout";
 import Link from "ui/link";
-import * as S from "./new-game.styles";
+import * as S from "./styles";
 
 function NewGame() {
   const inputCode = useRef(null);

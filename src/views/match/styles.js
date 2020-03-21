@@ -27,7 +27,7 @@ const Footer = styled.div`
   background-color: ${props => (props.current ? "#dcfbeb" : color.grayHard)};
 `;
 
-const ArroRightIcon = styled(FaArrowRight)`
+const ArrowRightIcon = styled(FaArrowRight)`
   font-size: 14px;
 `;
 
@@ -115,7 +115,7 @@ const HighlightNumber = styled.div`
 
 export {
   Footer,
-  ArroRightIcon,
+  ArrowRightIcon,
   SendButton,
   StyledInputText,
   Grid,

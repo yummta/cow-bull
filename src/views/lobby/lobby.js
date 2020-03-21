@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import ContainerApp from "components/container-app";
 import cow from "assets/svg/big-cow.svg";
 import bull from "assets/svg/big-bull.svg";
-import * as S from "./lobby.styles";
+import * as S from "./styles";
 
 function Lobby({ roomId, ready, setGameState }) {
   const [counter, setCounter] = React.useState(3);

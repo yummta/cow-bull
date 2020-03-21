@@ -1,14 +1,7 @@
 import React from "react";
 import cow from "assets/svg/mini-cow.svg";
 import bull from "assets/svg/mini-bull.svg";
-import {
-  Wrapper,
-  Numbers,
-  Results,
-  ResultSlot,
-  Image,
-  Data,
-} from "./move.style";
+import * as S from "./styles";
 
 function Move({
   number = "----",
@@ -17,21 +10,21 @@ function Move({
   className,
 }) {
   return (
-    <Wrapper size={size} className={className}>
-      <Numbers size={size}>
-        <Data>{number}</Data>
-      </Numbers>
-      <Results size={size}>
-        <ResultSlot>
+    <S.Wrapper size={size} className={className}>
+      <S.Numbers size={size}>
+        <S.Data>{number}</S.Data>
+      </S.Numbers>
+      <S.Results size={size}>
+        <S.ResultSlot>
           {result[0]}
-          <Image size={size} src={cow} />
-        </ResultSlot>
-        <ResultSlot>
+          <S.Image size={size} src={cow} />
+        </S.ResultSlot>
+        <S.ResultSlot>
           {result[1]}
-          <Image size={size} src={bull} />
-        </ResultSlot>
-      </Results>
-    </Wrapper>
+          <S.Image size={size} src={bull} />
+        </S.ResultSlot>
+      </S.Results>
+    </S.Wrapper>
   );
 }
 
